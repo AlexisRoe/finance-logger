@@ -1,3 +1,30 @@
+
+
+// classes
+class Invoice {
+    // client: string;
+    // details: string;
+    // amount: number;
+
+    // constructor (client: string, details: string, amount: number){
+    //     this.client = client;
+    //     this.details = details;
+    //     this.amount = amount
+    // }
+
+    constructor (
+        public client: string,
+        public details: string,
+        public amount: number
+    ){}
+
+    format() {
+        return `${this.client} owes £${this.amount} for ${this.details}`
+    }
+}
+
+let invoices: Invoice[] = []
+
 // form elements
 const form = document.querySelector(".new-item-form") as HTMLFormElement;
 const type = document.querySelector("#type") as HTMLSelectElement;
