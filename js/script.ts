@@ -1,17 +1,12 @@
-//  interface
-
-interface IsPerson {
-    name: string;
-    age: number;
-    speak(a: string): void;
-    spend(a: number): number;
-}
-
+const ul = document.querySelector("ul")!;
+const form = document.querySelector(".new-item-form") as HTMLFormElement;
+const type = document.querySelector("#type") as HTMLSelectElement;
+const toFrom = document.querySelector("#toFrom") as HTMLInputElement;
+const details = document.querySelector("#details") as HTMLInputElement;
+const amount  = document.querySelector("#amount") as HTMLInputElement;
 interface HasFormatter {
     format(): string;
 }
-
-// classes
 class Invoice implements HasFormatter{
     constructor (
         public client: string,
@@ -35,8 +30,6 @@ class Payment implements HasFormatter {
         return `${this.recipient} is owed €${this.amount} for ${this.details}`
     }
 }
-
-// listemplate
 
 class ListTemplate {
     constructor (private container: HTMLUListElement){}
@@ -62,16 +55,7 @@ class ListTemplate {
     }
 }
 
-// list ul template instance
-const ul = document.querySelector("ul")!;
 const list = new ListTemplate(ul);
-
-// form elements
-const form = document.querySelector(".new-item-form") as HTMLFormElement;
-const type = document.querySelector("#type") as HTMLSelectElement;
-const toFrom = document.querySelector("#toFrom") as HTMLInputElement;
-const details = document.querySelector("#details") as HTMLInputElement;
-const amount  = document.querySelector("#amount") as HTMLInputElement;
 
 form.addEventListener("submit", (event: Event) => {
     event.preventDefault();

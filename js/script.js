@@ -1,4 +1,3 @@
-//  interface
 var __spreadArrays = (this && this.__spreadArrays) || function () {
     for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
     for (var r = Array(s), k = 0, i = 0; i < il; i++)
@@ -6,7 +5,12 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
             r[k] = a[j];
     return r;
 };
-// classes
+var ul = document.querySelector("ul");
+var form = document.querySelector(".new-item-form");
+var type = document.querySelector("#type");
+var toFrom = document.querySelector("#toFrom");
+var details = document.querySelector("#details");
+var amount = document.querySelector("#amount");
 var Invoice = /** @class */ (function () {
     function Invoice(client, details, amount) {
         this.client = client;
@@ -29,7 +33,6 @@ var Payment = /** @class */ (function () {
     };
     return Payment;
 }());
-// listemplate
 var ListTemplate = /** @class */ (function () {
     function ListTemplate(container) {
         this.container = container;
@@ -54,15 +57,7 @@ var ListTemplate = /** @class */ (function () {
     };
     return ListTemplate;
 }());
-// list ul template instance
-var ul = document.querySelector("ul");
 var list = new ListTemplate(ul);
-// form elements
-var form = document.querySelector(".new-item-form");
-var type = document.querySelector("#type");
-var toFrom = document.querySelector("#toFrom");
-var details = document.querySelector("#details");
-var amount = document.querySelector("#amount");
 form.addEventListener("submit", function (event) {
     event.preventDefault();
     var values = [toFrom.value, details.value, amount.valueAsNumber];
