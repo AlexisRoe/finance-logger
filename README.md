@@ -1,4 +1,8 @@
-# finance-logger
+# Playground for Learning TypeScript
+
+with vanilla Javascript, classes
+
+## finance-logger
 
 based on a tutorial by net ninja, you can find it on [Github](https://github.com/iamshaunjp/typescript-tutorial)
 
