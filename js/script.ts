@@ -1,7 +1,18 @@
+//  interface
 
+interface IsPerson {
+    name: string;
+    age: number;
+    speak(a: string): void;
+    spend(a: number): number;
+}
+
+interface HasFormatter {
+    format(): string;
+}
 
 // classes
-class Invoice {
+class Invoice implements HasFormatter{
     // client: string;
     // details: string;
     // amount: number;
@@ -20,6 +31,18 @@ class Invoice {
 
     format() {
         return `${this.client} owes £${this.amount} for ${this.details}`
+    }
+}
+
+class Payment implements HasFormatter {
+    constructor (
+        public recipient: string,
+        public details: string,
+        public amount: number
+    ){}
+
+    format() {
+        return `${this.recipient} is owed £${this.amount} for ${this.details}`
     }
 }
 
