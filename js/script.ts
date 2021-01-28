@@ -13,16 +13,6 @@ interface HasFormatter {
 
 // classes
 class Invoice implements HasFormatter{
-    // client: string;
-    // details: string;
-    // amount: number;
-
-    // constructor (client: string, details: string, amount: number){
-    //     this.client = client;
-    //     this.details = details;
-    //     this.amount = amount
-    // }
-
     constructor (
         public client: string,
         public details: string,
@@ -30,7 +20,7 @@ class Invoice implements HasFormatter{
     ){}
 
     format() {
-        return `${this.client} owes £${this.amount} for ${this.details}`
+        return `${this.client} owes €${this.amount} for ${this.details}`
     }
 }
 
@@ -42,7 +32,7 @@ class Payment implements HasFormatter {
     ){}
 
     format() {
-        return `${this.recipient} is owed £${this.amount} for ${this.details}`
+        return `${this.recipient} is owed €${this.amount} for ${this.details}`
     }
 }
 
@@ -86,17 +76,22 @@ const amount  = document.querySelector("#amount") as HTMLInputElement;
 form.addEventListener("submit", (event: Event) => {
     event.preventDefault();
 
+    let values : [string, string, number] = [toFrom.value, details.value, amount.valueAsNumber]
     let doc: HasFormatter;
 
     if (type.value === "invoice") {
-        doc = new Invoice(toFrom.value, details.value, amount.valueAsNumber)
+        doc = new Invoice(...values)
         list.render(doc, type.value, "start")
     } else if (type.value === "payment") {
-        doc = new Payment(toFrom.value, details.value, amount.valueAsNumber)
+        doc = new Payment(...values)
         list.render(doc, type.value, "end")
     } else {
         console.log("Ups, something gone wrong 🤷‍♂️");
         return;
     }
+
+    toFrom.value = "";
+    details.value = "";
+    amount.value = ""
 
 })
