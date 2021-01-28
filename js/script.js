@@ -30,7 +30,34 @@ var Payment = /** @class */ (function () {
     };
     return Payment;
 }());
-var invoices = [];
+// listemplate
+var ListTemplate = /** @class */ (function () {
+    function ListTemplate(container) {
+        this.container = container;
+    }
+    ListTemplate.prototype.render = function (item, heading, position) {
+        var li = document.createElement("li");
+        var h4 = document.createElement("h4");
+        h4.innerText = heading;
+        li.append(h4);
+        var p = document.createElement("p");
+        p.innerText = item.format();
+        li.append(p);
+        if (position === "start") {
+            this.container.prepend(li);
+        }
+        else if (position === "end") {
+            this.container.append(li);
+        }
+        else {
+            console.error("Upps, something gone wrong.");
+        }
+    };
+    return ListTemplate;
+}());
+// list ul template instance
+var ul = document.querySelector("ul");
+var list = new ListTemplate(ul);
 // form elements
 var form = document.querySelector(".new-item-form");
 var type = document.querySelector("#type");
@@ -39,5 +66,17 @@ var details = document.querySelector("#details");
 var amount = document.querySelector("#amount");
 form.addEventListener("submit", function (event) {
     event.preventDefault();
-    console.log(type.value, toFrom.value, details.value, amount.valueAsNumber);
+    var doc;
+    if (type.value === "invoice") {
+        doc = new Invoice(toFrom.value, details.value, amount.valueAsNumber);
+        list.render(doc, type.value, "start");
+    }
+    else if (type.value === "payment") {
+        doc = new Payment(toFrom.value, details.value, amount.valueAsNumber);
+        list.render(doc, type.value, "end");
+    }
+    else {
+        console.log("Ups, something gone wrong 🤷‍♂️");
+        return;
+    }
 });
